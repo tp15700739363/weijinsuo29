@@ -1,0 +1,47 @@
+/* 头部区域 */
+#header{
+    border-bottom: 1px solid #ccc;
+    .container{
+        .row{
+            // 保证是子代 使用>
+            >div{
+                height: 40px;
+                line-height: 40px;
+                font-size: 12px;
+                a{
+                    color:#666;
+                }
+                // 第一个带二维码的a样式不一样单独设置
+                .link{
+                    display: block;
+                    position: relative;
+                    img{
+                        position: absolute;
+                        top: 40px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        display: none;
+                    }
+                    // &符号表示当前选择器 a:hover
+                    &:hover{
+                        img{
+                            display: block;
+                        }
+                    }
+                }
+                // a:hover{
+                //     img{
+                //         display: block;
+                //     }
+                // }
+                // & ~ div  div ~ div
+                & ~ div{
+                    border-left: 1px solid #ccc;
+                }
+                .btn-link{
+                    color:#666;
+                }
+            }
+        }
+    }
+}
