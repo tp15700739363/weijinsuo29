@@ -1,45 +1,309 @@
+@main-color: #e92322;
+
 /* 头部区域 */
-#header{
+#header {
     border-bottom: 1px solid #ccc;
-    .container{
-        .row{
+
+    .container {
+        .row {
+
             // 保证是子代 使用>
-            >div{
+            >div {
                 height: 40px;
                 line-height: 40px;
                 font-size: 12px;
-                a{
-                    color:#666;
+
+                a {
+                    color: #666;
                 }
+
                 // 第一个带二维码的a样式不一样单独设置
-                .link{
+                .link {
                     display: block;
                     position: relative;
-                    img{
+
+                    img {
                         position: absolute;
                         top: 40px;
                         left: 50%;
                         transform: translateX(-50%);
                         display: none;
+                        z-index: 999;
                     }
+
                     // &符号表示当前选择器 a:hover
-                    &:hover{
-                        img{
+                    &:hover {
+                        img {
                             display: block;
                         }
                     }
                 }
+
                 // a:hover{
                 //     img{
                 //         display: block;
                 //     }
                 // }
                 // & ~ div  div ~ div
-                & ~ div{
+                &~div {
                     border-left: 1px solid #ccc;
                 }
-                .btn-link{
-                    color:#666;
+
+                .btn-link {
+                    color: #666;
+                }
+            }
+        }
+    }
+}
+
+/* 导航区域 */
+#nav {
+    background-color: #fff;
+    // 去掉默认导航条底部margin间距
+    margin-bottom: 0;
+    // 下面几个属性满足条件才会执行
+    // @media(max-width:767px){
+    //     position: fixed;
+    //     z-index: 999;
+    //     background: rgb(255, 255, 255);
+    //     width: 100%;       
+    // }
+    // 导航条头部 里面包含按钮 左边的logo
+    .navbar-header {
+
+        // 移动端切换的菜单按钮 
+        .navbar-toggle {
+            // 因为他默认有8  现在整个导航多加了30px 上下是15px 8 + 15px
+            margin-top: 8px+15px;
+        }
+
+        .navbar-brand {
+            height: 80px;
+            // 因为a默认有上下padding 15px 给了80 内容只有50 行高只有50px
+            line-height: 50px;
+
+            i {
+                font-size: 30px;
+            }
+
+            .icon-icon {
+                color: @main-color;
+
+            }
+
+            .icon-logo {
+                color: #333;
+
+            }
+        }
+    }
+
+    // 导航条的身体 包含了左右的导航链接
+    .navbar-collapse {
+
+        // 所有链接
+        .navbar-nav {
+            li {
+                a {
+                    height: 80px;
+                    // 也是有上下padding  -30px
+                    line-height: 50px;
+
+                    &:hover {
+                        border-bottom: 2px solid @main-color;
+                    }
+                }
+
+                &.active {
+                    a {
+                        background-color: #fff;
+                        border-bottom: 2px solid @main-color;
+                    }
+                }
+            }
+
+            // li.active{}
+        }
+    }
+}
+
+/* 轮播图区域的样式 */
+#slide {
+    .large-img {
+        // 因为每个图不一样 使用行内样式设置图片
+        // background-image: url(./weijinsuo/img/slide_01_2000x410.jpg);
+        height: 410px;
+        background-position: center center;
+    }
+
+    .small-img {
+        width: 100%;
+    }
+}
+
+#feature {
+    padding: 40px;
+
+    .media {
+        a {
+            color: #666;
+
+            &:hover {
+                text-decoration: none;
+                color: @main-color;
+            }
+        }
+    }
+
+    // .feature-box {
+    //     display: flex;
+    //     color: #666;
+
+    //     &:hover {
+    //         text-decoration: none;
+    //         color: @main-color;
+    //     }
+
+    //     .left {
+    //         width: 40px;
+    //         display: flex;
+    //         align-items: center;
+    //     }
+
+    //     .right {
+    //         flex: 1;
+    //     }
+    // }
+}
+
+#booking{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0;
+    // 可能在移动端不止一行
+    // line-height: 60px;
+    .text-danger{
+        color: @main-color;
+    }
+}
+
+/* 商品区域 */
+#products{
+    padding: 40px 0;
+    background-color: #eee;
+    // 商品所有标题菜单
+    .title{        
+        .nav-tabs{
+            li{
+                a{
+                    color:#333;
+                    border:0;
+                    border-bottom: 2px solid transparent;
+                    font-size: 16px;
+                    font-weight: 600;
+                    &:hover{
+                        background-color: transparent;                       
+                    }
+                }
+                &.active{
+                    a{
+                        background-color: transparent;
+                        border-bottom: 2px solid @main-color;
+                    }
+                }
+            }
+        }
+    }
+    // 商品所有内容
+    .tab-content{
+        .product{
+            background-color: #fff;
+            display: flex;
+            margin-top: 20px;
+            &.active{
+                background-color: @main-color;
+                color:#fff;
+                position: relative;
+                &::before{
+                    // 如果不使用类名也可以使用图标 只要使用图标的编码+字体名称即可
+                    content: "\e915";
+                    font-family: itcast;
+                    font-size: 30px;
+                    position: absolute;
+                    top: -6px;
+                }
+            }
+            .left{
+                flex:1;
+                padding: 15px;
+                .title{
+                    text-align: center;
+                }
+                .content{
+                    .row{
+                        div{
+                            &:nth-child(2n){
+                                text-align: right;
+                            }
+                            margin-bottom: 10px;
+                            p{
+                                // margin-bottom: 5px;
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+            .right{
+                width: 120px;
+                border-left: 1px dashed #666;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                p{
+                    margin-bottom: 0;
+                    strong{
+                        font-size: 30px;
+                    }
+                }
+                &::before, &::after{
+                    content: '';
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #eee;
+                    left: -8px;
+                    border-radius: 50%;
+                }
+                &::before{
+                    top: -8px;
+                }
+                &::after{
+                    bottom: -8px;
+                }
+                .tooltips{
+                    position: absolute;
+                    top: 20px;
+                    // 一定要设置定位父元素的宽度 不然父元素宽度不够 提示内容会被挤出来位置会跑偏
+                    width: 100%;
+                    text-align: center;
+                    button{
+                        &:first-child{
+                            color:@main-color;
+                            border:1px solid @main-color;
+                            background-color: #fff;
+                        }
+                        // 因为工具提示动态添加一个div在后面 按钮不是最后一个子元素 样式失效
+                        // last-of-type 选中最后一个按钮类型的元素 排除别的类型的元素
+                        &:last-of-type{
+                            color:#0f0;
+                            border:1px solid #0f0;
+                            background-color: #fff;
+                        }
+                    }
                 }
             }
         }
