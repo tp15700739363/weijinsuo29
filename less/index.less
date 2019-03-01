@@ -6,7 +6,6 @@
 
     .container {
         .row {
-
             // 保证是子代 使用>
             >div {
                 height: 40px;
@@ -52,6 +51,9 @@
                 .btn-link {
                     color: #666;
                 }
+                .form-horizontal .control-label{
+                    padding-top: 0;
+                }
             }
         }
     }
@@ -69,6 +71,11 @@
     //     background: rgb(255, 255, 255);
     //     width: 100%;       
     // }
+    z-index: 997;
+    // 吸顶的时候没有默认100%的宽度
+    width: 100%;
+    // 默认不会到最顶上设置一个top
+    top: 0;
     // 导航条头部 里面包含按钮 左边的logo
     .navbar-header {
 
@@ -257,6 +264,15 @@
             }
             .right{
                 width: 120px;
+                // 使用媒体查询针对某些有问题屏幕 进行样式调整
+                // 在340屏幕以下右边应该变小
+                @media(max-width: 340px){
+                    width: 100px;
+                }
+                // 在992 到 1200之间也要变小一点
+                @media(min-width: 992px) and (max-width:1200px){
+                    width: 100px;
+                }
                 border-left: 1px dashed #666;
                 display: flex;
                 flex-direction: column;
@@ -305,6 +321,99 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+/* 新闻区域样式 */
+#news{
+    padding: 40px 0;    
+    .row{
+        >div{
+            h4{
+                text-align: center;
+                line-height: 40px;
+                border-bottom: 1px dashed #ccc;
+                position: relative;
+                &::after{
+                    content: '';
+                    position: absolute;
+                    right: -10px;
+                    bottom: -5px;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    border:1px solid #ccc;
+                }
+            }
+            .nav-tabs{
+                border-bottom: 0;
+                // 当小和超小屏幕991及以下的时候需要让li平分1/4 让a居中
+                @media(max-width:991px){
+                    li{
+                        width: 25%;
+                        a{
+                            // a固定宽度 因为a是块级元素会和li宽度一样 所以要固定为60px
+                            width: 60px;
+                            // 因为是块级元素只能使用margin:0 auto; 居中
+                            margin: 0px auto;
+                            
+                        }
+                    }
+                }
+                li{
+                    a{
+                        border-radius: 50%;
+                        margin-bottom: 20px;
+                        color:#ccc;
+                        border:0;
+                        i{
+                            font-size: 30px;
+                        }
+                        &:hover{
+                            background-color: @main-color;
+                        }
+                    }
+                    &.active{
+                        a{
+                            background-color: @main-color;
+                        }
+                    }
+                }
+            }
+            .tab-content{
+                .list-group-item{
+                    border:0;
+                }
+            }
+        }
+    }
+}
+
+/* 合作伙伴区域的样式 */
+#footer{
+    padding: 20px 0;
+    .title{
+        h3{
+            text-align: center;
+        }
+    }
+    .content{
+        a{
+            display: block;
+            text-align: center;
+            color:#666;
+            &:hover{
+                color:@main-color;
+                text-decoration: none;
+            }
+            &:focus{
+                text-decoration: none;
+                outline: 0;
+            }
+            i{
+                font-size: 60px;
             }
         }
     }
